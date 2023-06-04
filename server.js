@@ -10,8 +10,7 @@ app.post('/api/submit', (req, res) => {
     // Example: const formData = req.body;
     // Store the data in your desired storage mechanism
 
-    // Return a response or send a success status
-    res.send("dfbg");
+    // Send a response or send a success status
     res.sendStatus(200);
 });
 
