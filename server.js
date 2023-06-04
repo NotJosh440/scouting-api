@@ -19,3 +19,7 @@ app.post('/api/submit', (req, res) => {
 
     res.send(finalString);
 });
+
+app.listen(process.env.PORT || 8000, () => {
+    console.log('Server started');
+});
