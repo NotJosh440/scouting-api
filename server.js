@@ -16,9 +16,7 @@ app.post('/api/submit', (req, res) => {
     const finalString = req.body; // Assuming the finalString is sent in the request body
 
     // Send a response or send a success status
-    res.sendStatus(200);
     console.log("fvgrhty");
-
     res.json(finalString);
 });
 
