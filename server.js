@@ -7,6 +7,7 @@ app.post('/api/submit', (req, res) => {
     // Store the data in your desired storage mechanism
 
     // Return a response or send a success status
+    res.send("dfbg");
     res.sendStatus(200);
 });
 
