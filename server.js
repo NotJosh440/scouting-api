@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
+const path = require('path');
+const { pathToFileURL } = require('url');
 const app = express();
 
 // Enable CORS
@@ -15,12 +17,13 @@ app.post('/api/submit', (req, res) => {
 
     // Send a response or send a success status
     console.log(req.body); // Check the received data
-    fs.writeFile('1data.txt', finalString, 'utf8', (err) => {
+    fs.writeFile('data.txt', finalString, 'utf8', (err) => {
         if (err) {
             console.error('Error writing to file:', err);
             res.sendStatus(500);
         } else {
             console.log('Data stored in submitted_data.txt');
+            console.log(pathToFileURL("data.txt"));
             res.sendStatus(200);
         }
     });
