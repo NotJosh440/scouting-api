@@ -13,10 +13,13 @@ app.post('/api/submit', (req, res) => {
     // Example: const formData = req.body;
     // Store the data in your desired storage mechanism
 
+    const finalString = req.body; // Assuming the finalString is sent in the request body
+
     // Send a response or send a success status
     res.sendStatus(200);
     console.log("fvgrhty");
-    res.json(finalstring);
+
+    res.json(finalString);
 });
 
 app.get('/api/data', (req, res) => {
