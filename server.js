@@ -23,16 +23,21 @@ app.post('/api/submit', (req, res) => {
 });
 
 app.get('/api/data', (req, res) => {
-    // Read the contents of the text file
-    fs.readFile('/app/data.txt', 'utf8', (error, data) => {
-        if (error) {
-            console.error('Error reading file:', error);
-            res.sendStatus(500);
-        } else {
-            const lines = data.split('\n').filter(Boolean); // Split data into lines and remove empty lines
-            res.json(lines);
-        }
-    });
+    // Read the contents of the data.txt file
+    const fs = require('fs');
+    const data = fs.readFileSync('/app/data.txt', 'utf-8');
+
+    let jsonData;
+    try {
+        // Parse the JSON data
+        jsonData = JSON.parse(data);
+    } catch (error) {
+        console.error('Error parsing data:', error);
+        return res.status(500).json({ error: 'Failed to parse data' });
+    }
+
+    // Return the parsed JSON data as the response
+    res.json(jsonData);
 });
 
 app.listen(process.env.PORT || 8000, () => {
