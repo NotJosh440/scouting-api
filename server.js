@@ -5,6 +5,9 @@ const app = express();
 // Enable CORS
 app.use(cors());
 
+// Set CORS headers for specific route
+app.options('/api/submit', cors());
+
 app.post('/api/submit', (req, res) => {
     // Access form data from req.body and process/store it
     // Example: const formData = req.body;
