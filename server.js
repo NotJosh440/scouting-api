@@ -11,15 +11,14 @@ app.post('/api/submit', (req, res) => {
     const finalString = req.body;
 
     // Store the data in a text file
-    fs.appendFile('data.txt', finalString + '\n', (err) => {
-        if (err) {
-            console.error('An error occurred while storing the data:', err);
-            return res.status(500).json({ message: 'Error storing the data' });
-        }
-
+    try {
+        fs.appendFileSync('data.txt', finalString + '\n');
         console.log('Data stored successfully');
-        return res.sendStatus(200);
-    });
+        res.sendStatus(200);
+    } catch (err) {
+        console.error('An error occurred while storing the data:', err);
+        res.status(500).json({ message: 'Error storing the data' });
+    }
 });
 
 app.listen(process.env.PORT || 8000, () => {
