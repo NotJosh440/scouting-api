@@ -15,14 +15,14 @@ app.post('/api/submit', (req, res) => {
 
     // Send a response or send a success status
     console.log(req.body); // Check the received data
-    fs.appendFile('data.txt', finalString + '\n', (err) => {
+    fs.writeFile('1data.txt', finalString, 'utf8', (err) => {
         if (err) {
-            console.error('An error occurred while storing the data:', err);
-            return res.status(500).json({ message: 'Error storing the data' });
+            console.error('Error writing to file:', err);
+            res.sendStatus(500);
+        } else {
+            console.log('Data stored in submitted_data.txt');
+            res.sendStatus(200);
         }
-
-        console.log('Data stored successfully');
-        return res.sendStatus(200);
     });
 });
 
