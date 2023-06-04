@@ -24,20 +24,13 @@ app.post('/api/submit', (req, res) => {
 
 app.get('/api/data', (req, res) => {
     // Read the contents of the data.txt file
-    const fs = require('fs');
     const data = fs.readFileSync('/app/data.txt', 'utf-8');
 
-    // let jsonData;
-    // try {
-    //     // Parse the JSON data
-    //     jsonData = JSON.parse(data);
-    // } catch (error) {
-    //     console.error('Error parsing data:', error);
-    //     return res.status(500).json({ error: 'Failed to parse data' });
-    // }
+    // Remove quotation marks and replace '\n' with line breaks
+    const formattedData = data.replace(/"/g, '').replace(/\n/g, '<br>');
 
-    // Return the parsed JSON data as the response
-    res.json(data);
+    // Return the formatted data as the response
+    res.send(formattedData);
 });
 
 app.listen(process.env.PORT || 8000, () => {
