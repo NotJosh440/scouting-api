@@ -4,9 +4,7 @@ const app = express();
 
 // Enable CORS
 app.use(cors());
-app.use(express.json()); // Add this line to parse JSON data
-
-// ...
+app.use(express.json());
 
 app.post('/api/submit', (req, res) => {
     // Access form data from req.body and process/store it
@@ -17,6 +15,7 @@ app.post('/api/submit', (req, res) => {
 
     // Send a response or send a success status
     console.log("fvgrhty");
+    console.log(req.body); // Check the received data
 
     res.send(finalString);
 });
