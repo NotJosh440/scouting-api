@@ -4,9 +4,9 @@ const app = express();
 
 // Enable CORS
 app.use(cors());
+app.use(express.json()); // Add this line to parse JSON data
 
-// Set CORS headers for specific route
-app.options('/api/submit', cors());
+// ...
 
 app.post('/api/submit', (req, res) => {
     // Access form data from req.body and process/store it
@@ -17,7 +17,7 @@ app.post('/api/submit', (req, res) => {
 
     // Send a response or send a success status
     res.sendStatus(200);
-    console.log(finalString);
+    console.log("fvgrhty");
 
     res.json(finalString);
 });
