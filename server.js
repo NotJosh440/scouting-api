@@ -7,20 +7,30 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Serve the text file as a static asset
-app.use('/data', express.static('data.txt'));
-
 app.post('/api/submit', (req, res) => {
     const finalString = req.body;
 
-    // Store the data in a text file
-    fs.appendFile('data.txt', finalString + '\n', (err) => {
-        if (err) {
-            console.error('Error writing to file:', err);
+    // Write the submitted data to a text file
+    fs.appendFile('/app/data.txt', finalString + '\n', (error) => {
+        if (error) {
+            console.error('Error writing to file:', error);
             res.sendStatus(500);
         } else {
-            console.log('Data written to file successfully');
+            console.log('Data written to file');
             res.sendStatus(200);
+        }
+    });
+});
+
+app.get('/api/data', (req, res) => {
+    // Read the contents of the text file
+    fs.readFile('/app/data.txt', 'utf8', (error, data) => {
+        if (error) {
+            console.error('Error reading file:', error);
+            res.sendStatus(500);
+        } else {
+            const lines = data.split('\n').filter(Boolean); // Split data into lines and remove empty lines
+            res.json(lines);
         }
     });
 });
