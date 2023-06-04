@@ -10,14 +10,12 @@ app.post('/api/submit', (req, res) => {
     // Access form data from req.body and process/store it
     // Example: const formData = req.body;
     // Store the data in your desired storage mechanism
-
-    console.log("fvgrhty");
     const finalString = req.body;
 
     // Send a response or send a success status
     console.log(req.body); // Check the received data
 
-    res.send(finalString);
+    res.send("Submitted Scouting Form");
 });
 
 app.listen(process.env.PORT || 8000, () => {
