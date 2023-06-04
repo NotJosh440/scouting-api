@@ -16,6 +16,15 @@ app.post('/api/submit', (req, res) => {
     // Send a response or send a success status
     res.sendStatus(200);
     console.log("good");
+    res.json(finalstring);
+});
+
+app.get('/api/data', (req, res) => {
+    // Retrieve the data from your storage mechanism
+    // Example: const formData = fetchDataFromDatabase();
+
+    // Send the data as the response
+    res.json(formData);
 });
 
 // Start the server
