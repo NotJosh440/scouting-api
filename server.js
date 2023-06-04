@@ -14,12 +14,11 @@ app.post('/api/submit', (req, res) => {
     // Store the data in your desired storage mechanism
 
     const finalString = req.body;
-    const formData = finalString.split('|');
 
     // Send a response or send a success status
     console.log("fvgrhty");
 
-    res.json(formData);
+    res.send(finalString);
 });
 
 app.get('/api/data', (req, res) => {
