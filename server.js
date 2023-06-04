@@ -17,7 +17,7 @@ app.post('/api/submit', (req, res) => {
 
     // Send a response or send a success status
     res.sendStatus(200);
-    console.log("fvgrhty");
+    console.log(finalString);
 
     res.json(finalString);
 });
