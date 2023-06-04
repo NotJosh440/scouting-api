@@ -17,7 +17,7 @@ app.post('/api/submit', (req, res) => {
 
     // Send a response or send a success status
     console.log(req.body); // Check the received data
-    fs.writeFile('data.txt', finalString, 'utf8', (err) => {
+    fs.writeFile('/data.txt', finalString, 'utf8', (err) => {
         if (err) {
             console.error('Error writing to file:', err);
             res.sendStatus(500);
