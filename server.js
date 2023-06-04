@@ -5,7 +5,7 @@ const app = express();
 
 // Enable CORS
 app.use(cors());
-app.use(express.json());
+app.use(express.text());
 
 app.post('/api/submit', (req, res) => {
     const finalString = req.body;
@@ -27,17 +27,17 @@ app.get('/api/data', (req, res) => {
     const fs = require('fs');
     const data = fs.readFileSync('/app/data.txt', 'utf-8');
 
-    let jsonData;
-    try {
-        // Parse the JSON data
-        jsonData = JSON.parse(data);
-    } catch (error) {
-        console.error('Error parsing data:', error);
-        return res.status(500).json({ error: 'Failed to parse data' });
-    }
+    // let jsonData;
+    // try {
+    //     // Parse the JSON data
+    //     jsonData = JSON.parse(data);
+    // } catch (error) {
+    //     console.error('Error parsing data:', error);
+    //     return res.status(500).json({ error: 'Failed to parse data' });
+    // }
 
     // Return the parsed JSON data as the response
-    res.json(jsonData);
+    res.json(data);
 });
 
 app.listen(process.env.PORT || 8000, () => {
