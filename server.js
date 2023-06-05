@@ -11,7 +11,7 @@ app.post('/api/submit', (req, res) => {
     const finalString = req.body;
 
     // Write the submitted data to a text file
-    fs.appendFile('/app/data.txt', finalString + '\n', (error) => {
+    fs.appendFile('/data.txt', finalString + '\n', (error) => {
         if (error) {
             console.error('Error writing to file:', error);
             res.sendStatus(500);
@@ -22,9 +22,9 @@ app.post('/api/submit', (req, res) => {
     });
 });
 
-app.get('/api/data', (req, res) => {
+app.get('/data', (req, res) => {
     // Read the contents of the data.txt file
-    const data = fs.readFileSync('/app/data.txt', 'utf-8');
+    const data = fs.readFileSync('/data.txt', 'utf-8');
 
     // Remove quotation marks and replace '\n' with line breaks
     const formattedData = data.replace(/"/g, '').replace(/\n/g, '<br>');
