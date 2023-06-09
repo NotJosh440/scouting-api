@@ -26,12 +26,35 @@ app.get('/data', (req, res) => {
     // Read the contents of the data.txt file
     const data = fs.readFileSync('/data.txt', 'utf-8');
 
-    // Remove quotation marks and replace '\n' with line breaks
-    const formattedData = data.replace(/"/g, '').replace(/\n/g, '<br>');
+    // Split the data into rows based on new lines
+    const rows = data.split('\n');
 
-    // Return the formatted data as the response
-    res.send(formattedData);
+    // Create an HTML table string
+    let tableHTML = '<table>';
+
+    rows.forEach((row) => {
+        // Split each row into columns based on the "|" separator
+        const columns = row.split('|');
+
+        // Create a row in the table
+        tableHTML += '<tr>';
+
+        columns.forEach((column) => {
+            // Add each column as a table cell
+            tableHTML += `<td>${column}</td>`;
+        });
+
+        // Close the row
+        tableHTML += '</tr>';
+    });
+
+    // Close the table
+    tableHTML += '</table>';
+
+    // Return the table as the response
+    res.send(tableHTML);
 });
+
 
 app.listen(process.env.PORT || 8000, () => {
     console.log('Server started');
