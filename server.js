@@ -29,8 +29,8 @@ app.get('/data', (req, res) => {
     // Split the data into rows based on new lines
     const rows = data.split('\n');
 
-    // Create an HTML table string
-    let tableHTML = '<table>';
+    // Create an HTML table string with CSS styles
+    let tableHTML = '<table style="border-collapse: collapse; width: 100%;">';
 
     rows.forEach((row) => {
         // Split each row into columns based on the "|" separator
@@ -40,8 +40,8 @@ app.get('/data', (req, res) => {
         tableHTML += '<tr>';
 
         columns.forEach((column) => {
-            // Add each column as a table cell
-            tableHTML += `<td>${column}</td>`;
+            // Add each column as a table cell with CSS styles
+            tableHTML += `<td style="border: 1px solid black; padding: 8px;">${column}</td>`;
         });
 
         // Close the row
@@ -54,7 +54,6 @@ app.get('/data', (req, res) => {
     // Return the table as the response
     res.send(tableHTML);
 });
-
 
 app.listen(process.env.PORT || 8000, () => {
     console.log('Server started');
