@@ -11,7 +11,7 @@ app.post('/api/submit', (req, res) => {
     const finalString = req.body;
 
     // Write the submitted data to a text file
-    fs.appendFile('/data.txt', finalString + '\n', (error) => {
+    fs.appendFile('/data.txt', '\n' + finalString, (error) => {
         if (error) {
             console.error('Error writing to file:', error);
             res.sendStatus(500);
@@ -57,4 +57,5 @@ app.get('/data', (req, res) => {
 
 app.listen(process.env.PORT || 8000, () => {
     console.log('Server started');
+    fs.appendFile('/data.txt', "3181 SCOUTING FORMS");
 });
