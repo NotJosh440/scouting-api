@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
-const XlsxPopulate = require('xlsx-populate');
 const app = express();
 
 // Enable CORS
@@ -15,7 +14,8 @@ app.post('/api/submit', (req, res) => {
     finalString = finalString.trim();
 
     // Write the submitted data to a text file
-    fs.appendFile('/data.txt', finalString + '\n', (error) => {
+    fs.appendFile('/data.txt', finalString, (error) => {
+        
         if (error) {
             console.error('Error writing to file:', error);
             res.sendStatus(500);
@@ -33,32 +33,30 @@ app.get('/data', (req, res) => {
     // Split the data into rows based on new lines
     const rows = data.split('\n');
 
-    // Create a new workbook
-    const workbook = XlsxPopulate.fromBlank();
+    // Create an HTML table string with CSS styles
+    let tableHTML = '<h1>Data Table</h1><table style="border-collapse: collapse; width: 100%;">';
 
-    // Get the first sheet
-    const sheet = workbook.sheet(0);
-
-    // Populate the sheet with data
-    rows.forEach((row, rowIndex) => {
+    rows.forEach((row) => {
         // Split each row into columns based on the "|" separator
         const columns = row.split('|');
 
-        columns.forEach((column, columnIndex) => {
-            // Set the value in each cell
-            sheet.cell(rowIndex + 1, columnIndex + 1).value(column);
+        // Create a row in the table
+        tableHTML += '<tr>';
+
+        columns.forEach((column) => {
+            // Add each column as a table cell with CSS styles
+            tableHTML += `<td style="border: 1px solid black; padding: 8px;">${column}</td>`;
         });
+
+        // Close the row
+        tableHTML += '</tr>';
     });
 
-    // Convert the workbook to a buffer
-    workbook.outputAsync().then((buffer) => {
-        // Set the response headers for Excel file download
-        res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        res.setHeader('Content-Disposition', 'attachment; filename=data.xlsx');
+    // Close the table
+    tableHTML += '</table>';
 
-        // Send the buffer as the response
-        res.send(buffer);
-    });
+    // Return the table as the response
+    res.send(tableHTML);
 });
 
 app.listen(process.env.PORT || 8000, () => {
