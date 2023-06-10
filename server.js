@@ -3,6 +3,7 @@ const cors = require('cors');
 const fs = require('fs');
 const app = express();
 
+
 // Enable CORS
 app.use(cors());
 app.use(express.text());
@@ -30,7 +31,8 @@ app.get('/data', (req, res) => {
     const rows = data.split('\n');
 
     // Create an HTML table string with CSS styles
-    let tableHTML = '<table style="border-collapse: collapse; width: 100%;">';
+    let tableHTML = '<h1>Data Table</h1><table style="border-collapse: collapse; width: 100%;">';
+
 
     rows.forEach((row) => {
         // Split each row into columns based on the "|" separator
@@ -57,5 +59,4 @@ app.get('/data', (req, res) => {
 
 app.listen(process.env.PORT || 8000, () => {
     console.log('Server started');
-    fs.appendFile('/data.txt', "3181 SCOUTING FORMS");
 });
