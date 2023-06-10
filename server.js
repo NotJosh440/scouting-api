@@ -8,7 +8,10 @@ app.use(cors());
 app.use(express.text());
 
 app.post('/api/submit', (req, res) => {
-    const finalString = req.body;
+    let finalString = req.body;
+
+    // Trim any leading or trailing whitespace
+    finalString = finalString.trim();
 
     // Write the submitted data to a text file
     fs.appendFile('/data.txt', finalString + '\n', (error) => {
@@ -30,7 +33,7 @@ app.get('/data', (req, res) => {
     const rows = data.split('\n');
 
     // Create an HTML table string with CSS styles
-    let tableHTML = '<style>h1 { margin: 0; }</style><h1>Data Table</h1><table style="border-collapse: collapse; width: 100%;">';
+    let tableHTML = '<h1>Data Table</h1><table style="border-collapse: collapse; width: 100%;">';
 
     rows.forEach((row) => {
         // Split each row into columns based on the "|" separator
