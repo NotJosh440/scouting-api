@@ -15,7 +15,7 @@ app.post('/api/submit', (req, res) => {
 
     // Write the submitted data to a text file
     fs.appendFile('/data.txt', finalString, (error) => {
-        
+
         if (error) {
             console.error('Error writing to file:', error);
             res.sendStatus(500);
@@ -45,7 +45,7 @@ app.get('/data', (req, res) => {
 
         columns.forEach((column) => {
             // Add each column as a table cell with CSS styles
-            tableHTML += `<td style="border: 1px solid black; padding: 8px;">${column}</td>`;
+            tableHTML += `<td>${column}</td>`;
         });
 
         // Close the row
