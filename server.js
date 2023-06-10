@@ -14,7 +14,7 @@ app.post('/api/submit', (req, res) => {
     finalString = finalString.trim();
 
     // Write the submitted data to a text file
-    fs.appendFile('/data.txt', finalString, (error) => {
+    fs.appendFile('/data.txt', finalString + "\n", (error) => {
 
         if (error) {
             console.error('Error writing to file:', error);
