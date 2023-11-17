@@ -28,7 +28,9 @@ app.post('/api/submit', (req, res) => {
 
 app.get('/data', (req, res) => {
     // Read the contents of the data.txt file
-    const data = fs.readFileSync('/data.txt', 'utf-8');
+    const data = fs.readFileSync('/data.txt', 'utf-8', (err, data) => {
+        console.log("created the data file");
+    });
 
     // Split the data into rows based on new lines
     const rows = data.split('\n');
